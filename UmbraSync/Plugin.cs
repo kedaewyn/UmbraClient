@@ -118,7 +118,9 @@ public sealed class Plugin : IDalamudPlugin
             collection.AddSingleton<TokenProvider>();
             collection.AddSingleton<AccountRegistrationService>();
             collection.AddSingleton<PluginWarningNotificationService>();
+            collection.AddSingleton<ExternalPluginRestartAdvisor>();
             collection.AddSingleton<FileCompactor>();
+            collection.AddSingleton<CacheMonitor>();
             collection.AddSingleton<TagHandler>();
             collection.AddSingleton<SyncDefaultsService>();
             collection.AddSingleton<UidDisplayHandler>();
@@ -226,7 +228,6 @@ public sealed class Plugin : IDalamudPlugin
             collection.AddSingleton<HubFactory>();
 
             // add scoped services
-            collection.AddScoped<CacheMonitor>();
             collection.AddScoped<StorageRelocationService>();
             collection.AddScoped<UiFactory>();
             collection.AddScoped<SettingsUi>();
@@ -280,6 +281,7 @@ public sealed class Plugin : IDalamudPlugin
             collection.AddScoped<ChatTypingDetectionService>();
             collection.AddSingleton<PictomancyService>();
             collection.AddHostedService(p => p.GetRequiredService<PluginWatcherService>());
+            collection.AddHostedService(p => p.GetRequiredService<ExternalPluginRestartAdvisor>());
             collection.AddHostedService(p => p.GetRequiredService<ConfigurationSaveService>());
             collection.AddHostedService(p => p.GetRequiredService<MareMediator>());
             collection.AddHostedService(p => p.GetRequiredService<NotificationService>());

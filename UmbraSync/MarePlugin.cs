@@ -169,8 +169,7 @@ public class MarePlugin : MediatorSubscriberBase, IHostedService
             _runtimeServiceScope.ServiceProvider.GetRequiredService<ChatTargetSoundService>();
             _runtimeServiceScope.ServiceProvider.GetRequiredService<ChatTypingDetectionService>();
             _runtimeServiceScope.ServiceProvider.GetRequiredService<GuiHookService>();
-            var characterAnalyzer = _runtimeServiceScope.ServiceProvider.GetRequiredService<CharacterAnalyzer>();
-            _ = characterAnalyzer.ComputeAnalysis(print: false);
+            _runtimeServiceScope.ServiceProvider.GetRequiredService<CharacterAnalyzer>();
 
 #if !DEBUG
             if (_mareConfigService.Current.LogLevel != LogLevel.Information)

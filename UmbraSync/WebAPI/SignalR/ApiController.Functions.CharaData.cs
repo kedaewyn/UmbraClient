@@ -109,7 +109,7 @@ public partial class ApiController
 
         try
         {
-            Logger.LogDebug("Getting all own chara data");
+            Logger.LogDebug("Getting all shared chara data");
             return await _mareHub!.InvokeAsync<List<CharaDataMetaInfoDto>>(nameof(CharaDataGetShared)).ConfigureAwait(false);
         }
         catch (Exception ex)

@@ -29,10 +29,26 @@ public unsafe class VfxSpawnManager : DisposableMediatorSubscriberBase
 #pragma warning restore CS0649
     #endregion
 
+    private readonly bool _signaturesResolved;
+
     public VfxSpawnManager(ILogger<VfxSpawnManager> logger, IGameInteropProvider gameInteropProvider, MareMediator mareMediator)
         : base(logger, mareMediator)
     {
-        gameInteropProvider.InitializeFromAttributes(this);
+        try
+        {
+            gameInteropProvider.InitializeFromAttributes(this);
+            _signaturesResolved = _staticVfxCreate != null && _staticVfxRun != null && _staticVfxRemove != null;
+        }
+        catch (Exception ex)
+        {
+            Logger.LogWarning(ex, "VfxSpawnManager : resolution des signatures impossible, VFX desactives.");
+        }
+
+        if (!_signaturesResolved)
+        {
+            Logger.LogWarning("VfxSpawnManager : signatures non resolues (patch du jeu ?), les VFX sont desactives.");
+        }
+
         mareMediator.Subscribe<GposeStartMessage>(this, (msg) =>
         {
             ChangeSpawnVisibility(0f);
@@ -71,6 +87,8 @@ public unsafe class VfxSpawnManager : DisposableMediatorSubscriberBase
 
     private VfxStruct* SpawnStatic(string path, Vector3 pos, Quaternion rotation, float r, float g, float b, float a, Vector3 scale)
     {
+        if (!_signaturesResolved) return null;
+
         VfxStruct* vfx;
         fixed (byte* terminatedPath = Encoding.UTF8.GetBytes(path).NullTerminate())
         {
@@ -133,6 +151,7 @@ public unsafe class VfxSpawnManager : DisposableMediatorSubscriberBase
     public void DespawnObject(Guid? id)
     {
         if (id == null) return;
+        if (!_signaturesResolved) return;
         if (_spawnedObjects.Remove(id.Value, out var value))
         {
             Logger.LogDebug("Despawning {obj:X}", value.Address);
@@ -142,6 +161,8 @@ public unsafe class VfxSpawnManager : DisposableMediatorSubscriberBase
 
     private void RemoveAllVfx()
     {
+        if (!_signaturesResolved) return;
+
         foreach (var obj in _spawnedObjects.Values)
         {
             Logger.LogDebug("Despawning {obj:X}", obj);

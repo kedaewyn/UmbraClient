@@ -7224,4 +7224,10 @@ Le serveur est prêt, en attente de l'intégration avec A Quest Reborn.</value>
   <data name="Settings.General.ClearGlassInGpose.Help" xml:space="preserve">
     <value>Rend les fenêtres nettement plus transparentes pendant les poses de groupe, pour dégager la vue sur la scène. Sans effet en dehors du GPose, et ignoré si l'interface opaque est activée.</value>
   </data>
+  <data name="PluginRestart.Title" xml:space="preserve">
+    <value>Relancez UmbraSync</value>
+  </data>
+  <data name="PluginRestart.Body" xml:space="preserve">
+    <value>{0} vient d'être rechargé ou mis à jour. Désactivez puis réactivez UmbraSync depuis l'installeur de Plugin Dalamud pour rétablir la synchronisation.</value>
+  </data>
 </root>

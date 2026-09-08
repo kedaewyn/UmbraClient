@@ -7314,4 +7314,10 @@ The server is ready, awaiting integration with A Quest Reborn.</value>
   <data name="Settings.General.ClearGlassInGpose.Help" xml:space="preserve">
     <value>Makes windows noticeably more transparent during group poses, to clear the view on the scene. No effect outside GPose, and ignored when the opaque interface is on.</value>
   </data>
+  <data name="PluginRestart.Title" xml:space="preserve">
+    <value>Restart UmbraSync</value>
+  </data>
+  <data name="PluginRestart.Body" xml:space="preserve">
+    <value>{0} was just reloaded or updated. Disable then re-enable UmbraSync in /xlplugins to restore synchronisation.</value>
+  </data>
 </root>

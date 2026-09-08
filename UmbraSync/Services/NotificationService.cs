@@ -165,17 +165,18 @@ public class NotificationService : DisposableMediatorSubscriberBase, IHostedServ
         if (!_dalamudUtilService.IsLoggedIn) return;
 
         var baseMsg = new NotificationMessage(message.Title, message.Message, message.Type, message.ToastDuration);
+        
+        var location = message.ForceBoth
+            ? NotificationLocation.Both
+            : message.Type switch
+            {
+                NotificationType.Info or NotificationType.Success => _configurationService.Current.InfoNotification,
+                NotificationType.Warning => _configurationService.Current.WarningNotification,
+                NotificationType.Error => _configurationService.Current.ErrorNotification,
+                _ => NotificationLocation.Both,
+            };
 
-        // Respecter les settings de notification de l'utilisateur
-        var location = message.Type switch
-        {
-            NotificationType.Info or NotificationType.Success => _configurationService.Current.InfoNotification,
-            NotificationType.Warning => _configurationService.Current.WarningNotification,
-            NotificationType.Error => _configurationService.Current.ErrorNotification,
-            _ => NotificationLocation.Both,
-        };
-
-        ShowNotificationLocationBased(baseMsg, location, false, false);
+        ShowNotificationLocationBased(baseMsg, location, message.ForceBoth, false);
     }
 
     private void OnSyncshellAutoDetectStateChanged(SyncshellAutoDetectStateChanged msg)

@@ -1,5 +1,4 @@
-﻿using Dalamud.Plugin.Services;
-using FFXIVClientStructs.FFXIV.Client.Game.Character;
+﻿using FFXIVClientStructs.FFXIV.Client.Game.Character;
 using FFXIVClientStructs.FFXIV.Client.UI.Info;
 using Microsoft.Extensions.Logging;
 #pragma warning disable CS8500
@@ -13,9 +12,8 @@ public unsafe class BlockedCharacterHandler
 
     private readonly ILogger<BlockedCharacterHandler> _logger;
 
-    public BlockedCharacterHandler(ILogger<BlockedCharacterHandler> logger, IGameInteropProvider gameInteropProvider)
+    public BlockedCharacterHandler(ILogger<BlockedCharacterHandler> logger)
     {
-        gameInteropProvider.InitializeFromAttributes(this);
         _logger = logger;
     }
 

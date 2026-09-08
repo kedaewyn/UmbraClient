@@ -7290,4 +7290,10 @@ The server is ready, awaiting integration with A Quest Reborn.</value>
   <data name="SyncshellAdmin.Slot.SaveErrorMessage" xml:space="preserve">
     <value>The slot could not be saved. Try again in a moment.</value>
   </data>
+  <data name="PluginRestart.Title" xml:space="preserve">
+    <value>Restart UmbraSync</value>
+  </data>
+  <data name="PluginRestart.Body" xml:space="preserve">
+    <value>{0} was just reloaded or updated. Disable then re-enable UmbraSync in /xlplugins to restore synchronisation.</value>
+  </data>
 </root>

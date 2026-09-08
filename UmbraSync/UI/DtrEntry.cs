@@ -67,7 +67,7 @@ public sealed class DtrEntry : IDisposable, IHostedService
         {
             _logger.LogDebug("Disposing DtrEntry");
             Clear();
-            _entry.Value.Remove();
+            _entry.Value.Dispose();
         }
     }
 

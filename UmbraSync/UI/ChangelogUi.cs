@@ -342,6 +342,14 @@ public sealed class ChangelogUi : WindowMediatorSubscriberBase
     {
         return new List<ChangelogEntry>
         {
+            new(new Version(3, 0, 3, 9008), "3.0.3.9008", new List<ChangelogLine>
+            {
+                new("Correction : Au lancement du jeu, l'analyse de votre personnage était lancée une première fois à vide, avant que vos données ne soient prêtes, puis relancée pour de bon. Elle ne part plus qu'une fois."),
+                new("Correction : Au lancement du jeu, l'analyse complète du stockage local partait deux fois en parallèle. Une seule analyse est désormais lancée."),
+                new("Correction : UmbraSync pouvait refuser de se charger entièrement, ou fermer le jeu au moment de décharger le plugin."),
+                new("Autre : Compatibilité vérifiée avec la dernière mise à jour de Dalamud."),
+                new("Autre : Nettoyage & amélioration interne du code."),
+            }),
             new(new Version(3, 0, 2, 9006), "3.0.2.9006", new List<ChangelogLine>
             {
                 new("Nouveauté : Un bouton pour changer l'emplacement du stockage local."),
